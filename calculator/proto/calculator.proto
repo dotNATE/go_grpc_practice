@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "github.com/dotNate/go-grpc-practice/calculator/proto";
+
+message SumRequest {
+    int32 n1 = 1;
+    int32 n2 = 2;
+}
+
+message SumResponse {
+    int32 result = 1;
+}
+
+message GetPrimesRequest {
+    int32 n = 1;
+}
+
+message GetPrimesResponse {
+    int32 result = 1;
+}
+
+message GetMeanAverageRequest {
+    int32 num = 1;
+}
+
+message GetMeanAverageResponse {
+    float result = 1;
+}
+
+message MaxRequest {
+    int32 num = 1;
+}
+
+message MaxResponse {
+    int32 result = 1;
+}
+
+message SqrtRequest {
+    int32 number = 1;
+}
+
+message SqrtResponse {
+    double result = 1;
+}
+
+service CalculatorService {
+    rpc Sum (SumRequest) returns (SumResponse);
+    rpc GetPrimes (GetPrimesRequest) returns (stream GetPrimesResponse);
+    rpc GetMeanAverage (stream GetMeanAverageRequest) returns (GetMeanAverageResponse);
+    rpc Max (stream MaxRequest) returns (stream MaxResponse);
+    rpc Sqrt (SqrtRequest) returns (SqrtResponse);
+}
